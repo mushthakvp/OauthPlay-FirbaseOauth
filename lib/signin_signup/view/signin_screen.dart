@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../viewmodel/signing_provider.dart';
 import 'widgets/oauth_icons.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -21,7 +22,29 @@ class SignInScreen extends StatelessWidget {
         ),
         child: ListView(
           children: [
-            SizedBox(height: size.width / 2),
+            SizedBox(height: size.width / 4),
+            Center(
+              child: AnimatedTextKit(
+                totalRepeatCount: 500,
+                isRepeatingAnimation: true,
+                animatedTexts: [
+                  ColorizeAnimatedText(
+                    'Create Account',
+                    textStyle: const TextStyle(
+                      fontSize: 30,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1,
+                    ),
+                    colors: [
+                      Colors.white,
+                      Colors.grey,
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: size.width / 5),
             TextFieldWidget(
               size: size,
               contoller: context.read<SigningPov>().nameController,
@@ -77,6 +100,28 @@ class SignInScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 34, top: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Already have an account ',
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(.6),
+                    ),
+                  ),
+                  const Text(
+                    'Login',
+                    style: TextStyle(
+                      color: Colors.white,
+                      decoration: TextDecoration.underline,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(

@@ -9,6 +9,7 @@ environment:
   sdk: ">=2.17.6 <3.0.0"
 
 dependencies:
+  animated_text_kit: ^4.2.2
   cloud_firestore: ^3.4.3
   cupertino_icons: ^1.0.2
   firebase_auth: ^3.6.2
