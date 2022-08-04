@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "852655950035",
+    "project_id": "crudoperations-7d493",
+    "storage_bucket": "crudoperations-7d493.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:852655950035:android:9e311e4548af564ddbac26",
+        "android_client_info": {
+          "package_name": "com.fouvty.crud"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "852655950035-kmvan2irhf2jafipslotdio5cuhuugbs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCI-ANqehvsk-f5XFgMMwCJCPUO5mamuMw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "852655950035-kmvan2irhf2jafipslotdio5cuhuugbs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
