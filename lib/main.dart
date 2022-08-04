@@ -1,9 +1,10 @@
+import 'package:crud/routes/routes.dart';
+import 'package:crud/signin_signup/viewmodel/signing_provider.dart';
+import 'package:crud/splash/view/splash_screen.dart';
 import 'package:crud/splash/viewmodel/splah_pov.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
-
-import 'home/view/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,14 +20,16 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<SplashPov>(create: (context) => SplashPov()),
+        ChangeNotifierProvider<SigningPov>(create: (context) => SigningPov()),
       ],
       child: MaterialApp(
+        navigatorKey: Routes.navigatorKey,
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.purple,
         ),
-        home: const HomeScreen(),
+        home: const SplashScreen(),
       ),
     );
   }

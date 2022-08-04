@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 
 class Routes {
-  static nextScreen({required BuildContext context, required var screen}) {
-    Navigator.push(
-      context,
+  static final navigatorKey = GlobalKey<NavigatorState>();
+
+  static nextScreen({required var screen}) {
+    navigatorKey.currentState?.push(
       MaterialPageRoute(
         builder: (context) => screen,
       ),
     );
   }
 
-  static removeScreen({required BuildContext context, required var screen}) {
-    Navigator.pushReplacement(
-      context,
+  static removeScreen({required var screen}) {
+    navigatorKey.currentState?.pushReplacement(
       MaterialPageRoute(builder: (context) => screen),
     );
   }
 
-  static popScreen({required BuildContext context}) {
-    Navigator.of(context).pop();
+  static popScreen() {
+    navigatorKey.currentState?.pop();
   }
 }

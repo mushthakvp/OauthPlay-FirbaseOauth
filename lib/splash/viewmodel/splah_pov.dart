@@ -1,16 +1,13 @@
 import 'dart:async';
-import 'package:crud/home/view/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import '../../routes/routes.dart';
+import '../../signin_signup/view/signin_screen.dart';
 
 class SplashPov extends ChangeNotifier {
   SplashPov() {
     Timer(
       const Duration(seconds: 3),
-      () => Routes.removeScreen(
-        context: context,
-        screen: const HomeScreen(),
-      ),
+      () => Routes.removeScreen(screen: const SignInScreen()),
     );
   }
 }

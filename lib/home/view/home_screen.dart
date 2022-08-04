@@ -8,11 +8,23 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('Oauth'),
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.purple,
+                Colors.indigo,
+              ],
+              stops: [0.5, 1.0],
+            ),
+          ),
+        ),
+      ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Routes.nextPage(
-            context: context,
+          Routes.nextScreen(
             screen: AddEditScrren(type: ScreenType.add),
           );
         },

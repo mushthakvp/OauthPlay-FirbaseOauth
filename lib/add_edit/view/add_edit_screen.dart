@@ -3,8 +3,6 @@ import 'package:crud/add_edit/model/model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../routes/routes.dart';
-
 class AddEditScrren extends StatelessWidget {
   final ScreenType type;
   AddEditScrren({Key? key, required this.type}) : super(key: key);
@@ -15,46 +13,17 @@ class AddEditScrren extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(100),
-        child: Container(
-          height: 100,
-          width: double.infinity,
+      appBar: AppBar(
+        title: Text(type == ScreenType.add ? 'Add Data' : 'Edit Data'),
+        flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
                 Colors.purple,
                 Colors.indigo,
               ],
+              stops: [0.5, 1.0],
             ),
-          ),
-          child: Column(
-            children: [
-              const SizedBox(height: 45),
-              Row(
-                children: [
-                  const SizedBox(width: 10),
-                  IconButton(
-                    onPressed: () {
-                      Routes.popScreen(context: context);
-                    },
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  Text(
-                    type == ScreenType.add ? 'Add Data' : 'Edit Data',
-                    style: GoogleFonts.cuprum(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20,
-                    ),
-                  )
-                ],
-              ),
-            ],
           ),
         ),
       ),
@@ -119,7 +88,7 @@ class AddEditScrren extends StatelessWidget {
     );
   }
 
-  String id = DateTime.now().toString();
+  final String id = DateTime.now().toString();
 
   checkData(UserData user) async {
     final docUser = FirebaseFirestore.instance.collection('crud').doc();
