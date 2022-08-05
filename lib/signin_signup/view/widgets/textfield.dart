@@ -1,4 +1,4 @@
-import 'package:crud/signin_signup/viewmodel/signing_provider.dart';
+import 'package:crud/signin_signup/viewmodel/signup_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
