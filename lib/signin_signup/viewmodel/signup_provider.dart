@@ -32,6 +32,19 @@ class SigningPov extends ChangeNotifier {
     }
   }
 
+  callSignUp(BuildContext context) async {
+    final msg = await context.read<OauthPov>().signUp(
+          email: emailController.text,
+          password: passwordController.text,
+        );
+    if (msg != '') {
+      // ignore: use_build_context_synchronously
+      showPopup(context, msg);
+    } else {
+      Routes.pushReplace(screen: const HomeScreen());
+    }
+  }
+
   showPopup(BuildContext context, String msg) {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(

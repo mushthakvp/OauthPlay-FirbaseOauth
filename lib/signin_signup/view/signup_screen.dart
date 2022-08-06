@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:crud/signin_signup/view/widgets/textfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../core/const.dart';
 import '../../routes/routes.dart';
 import '../viewmodel/firbase_provider.dart';
 import '../viewmodel/signup_provider.dart';
@@ -47,7 +50,22 @@ class SignUpScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: size.width / 5),
+            SizedBox(height: size.width / 6),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: Image.memory(
+                const Base64Decoder().convert(encodeImage),
+                height: 150.0,
+                width: 100.0,
+              ),
+            ),
+            // CircleAvatar(
+            //   radius: 70,
+            //   backgroundImage: MemoryImage(
+            //     const Base64Decoder().convert(encodeImage),
+            //   ),
+            // ),
+            const SizedBox(height: 40),
             TextFieldWidget(
               size: size,
               contoller: context.read<SigningPov>().nameController,
@@ -68,14 +86,6 @@ class SignUpScreen extends StatelessWidget {
               size: size,
               contoller: context.read<SigningPov>().passwordController,
               hint: 'Password',
-              type: TextInputType.visiblePassword,
-              icon: Icons.lock_outline,
-              obsecure: true,
-            ),
-            TextFieldWidget(
-              size: size,
-              contoller: context.read<SigningPov>().confirmPasswordController,
-              hint: 'Confirm Password',
               type: TextInputType.visiblePassword,
               icon: Icons.lock_outline,
               obsecure: true,
@@ -103,10 +113,10 @@ class SignUpScreen extends StatelessWidget {
                           },
                           child: Container(
                             margin: const EdgeInsets.symmetric(
-                              horizontal: 34,
+                              horizontal: 30,
                               vertical: 8,
                             ),
-                            height: 50,
+                            height: 48,
                             width: double.infinity,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),

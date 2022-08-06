@@ -32,7 +32,10 @@ class OauthPov extends ChangeNotifier {
     try {
       isLoadingUp = true;
       notifyListeners();
-      await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      await _auth.signInWithEmailAndPassword(
+        email: email.trim(),
+        password: password.trim(),
+      );
       isLoadingUp = false;
       notifyListeners();
       return Future.value('');
