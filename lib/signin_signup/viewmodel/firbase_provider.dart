@@ -6,6 +6,7 @@ class OauthPov extends ChangeNotifier {
 
   OauthPov(this._auth);
   bool isLoading = false;
+  bool isLoadingUp = false;
 
   Stream<User?> stream() => _auth.authStateChanges();
 
@@ -27,8 +28,19 @@ class OauthPov extends ChangeNotifier {
     }
   }
 
-  Future<void> signUp({required String email, required String password}) async {
-    
+  Future<String> signUp({required String email, required String password}) async {
+    try {
+      isLoadingUp = true;
+      notifyListeners();
+      await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      isLoadingUp = false;
+      notifyListeners();
+      return Future.value('');
+    } on FirebaseAuthException catch (ex) {
+      isLoadingUp = false;
+      notifyListeners();
+      return Future.value(ex.message);
+    }
   }
 
   Future<void> signOut() async {

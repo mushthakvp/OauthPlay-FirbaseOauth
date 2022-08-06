@@ -1,7 +1,9 @@
 import 'package:crud/signin_signup/view/widgets/textfield.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../routes/routes.dart';
+import '../viewmodel/firbase_provider.dart';
 import '../viewmodel/signup_provider.dart';
 import 'widgets/oauth_icons.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
@@ -78,29 +80,51 @@ class SignUpScreen extends StatelessWidget {
               icon: Icons.lock_outline,
               obsecure: true,
             ),
-            GestureDetector(
-              onTap: () {},
-              child: Container(
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 30,
-                  vertical: 8,
-                ),
-                height: 50,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: Colors.white.withOpacity(.5),
-                ),
-                child: const Center(
-                  child: Text(
-                    'Sign Up',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
+            Consumer<OauthPov>(
+              builder: (context, value, child) => Column(
+                children: [
+                  value.isLoadingUp
+                      ? Container(
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 34,
+                            vertical: 8,
+                          ),
+                          height: 50,
+                          child: const Center(
+                            child: CupertinoActivityIndicator(
+                              radius: 15,
+                              color: Colors.white,
+                            ),
+                          ),
+                        )
+                      : GestureDetector(
+                          onTap: () {
+                            context.read<SigningPov>().callFirbase(context);
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(
+                              horizontal: 34,
+                              vertical: 8,
+                            ),
+                            height: 50,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              color: Colors.white.withOpacity(.5),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                'Sign in',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                ],
               ),
             ),
             Padding(

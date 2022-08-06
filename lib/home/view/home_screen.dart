@@ -14,12 +14,9 @@ class HomeScreen extends StatelessWidget {
         title: const Text('Oauth'),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.purple,
-                Colors.indigo,
-              ],
-              stops: [0.5, 1.0],
+            image: DecorationImage(
+              image: AssetImage('assets/images/bg.webp'),
+              fit: BoxFit.cover,
             ),
           ),
         ),
