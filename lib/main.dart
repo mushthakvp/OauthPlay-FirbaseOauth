@@ -1,7 +1,10 @@
+import 'package:crud/home/view_model/home_provider.dart';
 import 'package:crud/routes/routes.dart';
+import 'package:crud/signin_signup/viewmodel/firbase_provider.dart';
 import 'package:crud/signin_signup/viewmodel/signup_provider.dart';
 import 'package:crud/splash/view/splash_screen.dart';
 import 'package:crud/splash/viewmodel/splah_pov.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
@@ -21,6 +24,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<SplashPov>(create: (context) => SplashPov()),
         ChangeNotifierProvider<SigningPov>(create: (context) => SigningPov()),
+        ChangeNotifierProvider<OauthPov>(create: (context) => OauthPov(FirebaseAuth.instance)),
+        StreamProvider(create: (context) => context.watch<OauthPov>().stream(), initialData: null),
+        ChangeNotifierProvider<HomeScreenPov>(create: (context) => HomeScreenPov()),
       ],
       child: MaterialApp(
         navigatorKey: Routes.navigatorKey,

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Routes {
   static final navigatorKey = GlobalKey<NavigatorState>();
 
-  static nextScreen({required var screen}) {
+  static push({required var screen}) {
     navigatorKey.currentState?.push(
       MaterialPageRoute(
         builder: (context) => screen,
@@ -11,13 +11,17 @@ class Routes {
     );
   }
 
-  static removeScreen({required var screen}) {
+  static pushReplace({required var screen}) {
     navigatorKey.currentState?.pushReplacement(
       MaterialPageRoute(builder: (context) => screen),
     );
   }
 
-  static popScreen() {
+  static pushRemove({required var screen}) {
+    navigatorKey.currentState?.pushAndRemoveUntil(MaterialPageRoute(builder: (context) => screen), (route) => false);
+  }
+
+  static pop() {
     navigatorKey.currentState?.pop();
   }
 }
