@@ -115,7 +115,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () => Routes.popScreen(),
+                    onTap: () => Routes.pop(),
                     child: const Text(
                       'Login',
                       style: TextStyle(
