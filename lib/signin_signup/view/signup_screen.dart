@@ -99,7 +99,7 @@ class SignUpScreen extends StatelessWidget {
                         )
                       : GestureDetector(
                           onTap: () {
-                            context.read<SigningPov>().callFirbase(context);
+                            context.read<SigningPov>().callSignUp(context);
                           },
                           child: Container(
                             margin: const EdgeInsets.symmetric(
@@ -114,7 +114,7 @@ class SignUpScreen extends StatelessWidget {
                             ),
                             child: const Center(
                               child: Text(
-                                'Sign in',
+                                'Sign Up',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,

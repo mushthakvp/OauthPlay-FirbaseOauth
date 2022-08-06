@@ -18,7 +18,7 @@ class SigningPov extends ChangeNotifier {
     notifyListeners();
   }
 
-  callFirbase(BuildContext context) async {
+  callLogin(BuildContext context) async {
     final msg = await context.read<OauthPov>().signIn(
           email: emailController.text,
           password: passwordController.text,
@@ -28,7 +28,20 @@ class SigningPov extends ChangeNotifier {
       // ignore: use_build_context_synchronously
       showPopup(context, msg);
     } else {
-      Routes.pushReplace(screen: const HomeScreen());
+      Routes.pushRemove(screen: const HomeScreen());
+    }
+  }
+
+  callSignUp(BuildContext context) async {
+    final msg = await context.read<OauthPov>().signUp(
+          email: emailController.text,
+          password: passwordController.text,
+        );
+    if (msg != '') {
+      // ignore: use_build_context_synchronously
+      showPopup(context, msg);
+    } else {
+      Routes.pushRemove(screen: const HomeScreen());
     }
   }
 
