@@ -85,7 +85,7 @@ class SignInScreen extends StatelessWidget {
                         )
                       : GestureDetector(
                           onTap: () {
-                            context.read<SigningPov>().callFirbase(context);
+                            context.read<SigningPov>().callSignIn(context);
                           },
                           child: Container(
                             margin: const EdgeInsets.symmetric(
