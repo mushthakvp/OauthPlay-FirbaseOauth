@@ -1,6 +1,7 @@
 import 'package:crud/home/view/home_screen.dart';
 import 'package:crud/routes/routes.dart';
 import 'package:crud/signin_signup/viewmodel/firbase_provider.dart';
+import 'package:crud/signin_signup/viewmodel/userimage_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,6 +12,9 @@ class SigningPov extends ChangeNotifier {
   final nameController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
+  //final collection = FirebaseFirestore.instance.collection(nameCt);
+  
+
   bool isObsecureOne = true;
 
   obsecureChange() {
@@ -18,7 +22,7 @@ class SigningPov extends ChangeNotifier {
     notifyListeners();
   }
 
-  callFirbase(BuildContext context) async {
+  callSignIn(BuildContext context) async {
     final msg = await context.read<OauthPov>().signIn(
           email: emailController.text,
           password: passwordController.text,
@@ -33,9 +37,16 @@ class SigningPov extends ChangeNotifier {
   }
 
   callSignUp(BuildContext context) async {
+    final email = emailController.text.trim();
+    final name = nameController.text.trim();
+    final image = context.read<UserImagePov>().imageToString;
+    final passWord = passwordController.text.trim();
     final msg = await context.read<OauthPov>().signUp(
-          email: emailController.text,
-          password: passwordController.text,
+          email: email,
+          password: passWord,
+          image: image,
+          name: name,
+          context: context,
         );
     if (msg != '') {
       // ignore: use_build_context_synchronously

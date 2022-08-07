@@ -1,10 +1,9 @@
 import 'dart:convert';
-
 import 'package:crud/signin_signup/view/widgets/textfield.dart';
+import 'package:crud/signin_signup/viewmodel/userimage_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../core/const.dart';
 import '../../routes/routes.dart';
 import '../viewmodel/firbase_provider.dart';
 import '../viewmodel/signup_provider.dart';
@@ -17,8 +16,8 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
+
+    return Scaffold( 
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -28,7 +27,7 @@ class SignUpScreen extends StatelessWidget {
         ),
         child: ListView(
           children: [
-            SizedBox(height: size.width / 4),
+            SizedBox(height: size.width / 5),
             Center(
               child: AnimatedTextKit(
                 totalRepeatCount: 500,
@@ -45,26 +44,19 @@ class SignUpScreen extends StatelessWidget {
                     colors: [
                       Colors.white,
                       Colors.grey,
+                      Colors.purple,
+                      Colors.indigo,
+                      Colors.white,
+                      Colors.grey,
+                      Colors.purple,
+                      Colors.indigo,
                     ],
                   ),
                 ],
               ),
             ),
             SizedBox(height: size.width / 6),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Image.memory(
-                const Base64Decoder().convert(encodeImage),
-                height: 150.0,
-                width: 100.0,
-              ),
-            ),
-            // CircleAvatar(
-            //   radius: 70,
-            //   backgroundImage: MemoryImage(
-            //     const Base64Decoder().convert(encodeImage),
-            //   ),
-            // ),
+            const ImageWidget(),
             const SizedBox(height: 40),
             TextFieldWidget(
               size: size,
@@ -109,7 +101,7 @@ class SignUpScreen extends StatelessWidget {
                         )
                       : GestureDetector(
                           onTap: () {
-                            context.read<SigningPov>().callFirbase(context);
+                            context.read<SigningPov>().callSignUp(context);
                           },
                           child: Container(
                             margin: const EdgeInsets.symmetric(
@@ -124,7 +116,7 @@ class SignUpScreen extends StatelessWidget {
                             ),
                             child: const Center(
                               child: Text(
-                                'Sign in',
+                                'Sign Up',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -167,6 +159,29 @@ class SignUpScreen extends StatelessWidget {
             ),
             const OauthIconsWidget()
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class ImageWidget extends StatelessWidget {
+  const ImageWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<UserImagePov>(
+      builder: (context, value, child) => GestureDetector(
+        onTap: () {
+          value.pickImage();
+        },
+        child: CircleAvatar(
+          radius: 70,
+          backgroundImage: MemoryImage(
+            const Base64Decoder().convert(value.imageToString),
+          ),
         ),
       ),
     );

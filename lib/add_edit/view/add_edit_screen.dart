@@ -91,7 +91,7 @@ class AddEditScrren extends StatelessWidget {
   final String id = DateTime.now().toString();
 
   checkData(UserData user) async {
-    final docUser = FirebaseFirestore.instance.collection('crud').doc();
+    final docUser = FirebaseFirestore.instance.collection('crud').doc('jhghj');
     final json = user.toJson();
     await docUser.set(json);
   }
