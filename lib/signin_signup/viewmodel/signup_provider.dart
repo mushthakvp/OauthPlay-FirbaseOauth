@@ -1,3 +1,6 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:crud/core/const.dart';
 import 'package:crud/home/view/home_screen.dart';
 import 'package:crud/routes/routes.dart';
 import 'package:crud/signin_signup/viewmodel/firbase_provider.dart';
@@ -10,10 +13,6 @@ class SigningPov extends ChangeNotifier {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final nameController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
-
-  //final collection = FirebaseFirestore.instance.collection(nameCt);
-  
 
   bool isObsecureOne = true;
 
@@ -29,10 +28,10 @@ class SigningPov extends ChangeNotifier {
         );
 
     if (msg != '') {
-      // ignore: use_build_context_synchronously
       showPopup(context, msg);
     } else {
-      Routes.pushReplace(screen: const HomeScreen());
+      disposeItems(context);
+      Routes.pushRemove(screen: const HomeScreen());
     }
   }
 
@@ -49,10 +48,10 @@ class SigningPov extends ChangeNotifier {
           context: context,
         );
     if (msg != '') {
-      // ignore: use_build_context_synchronously
       showPopup(context, msg);
     } else {
-      Routes.pushReplace(screen: const HomeScreen());
+      disposeItems(context);
+      Routes.pushRemove(screen: const HomeScreen());
     }
   }
 
@@ -67,5 +66,12 @@ class SigningPov extends ChangeNotifier {
         content: Text(msg),
       ),
     );
+  }
+
+  disposeItems(BuildContext context) {
+    nameController.text = '';
+    emailController.text = '';
+    passwordController.text = '';
+    context.read<UserImagePov>().imageToString = encodeImage;
   }
 }

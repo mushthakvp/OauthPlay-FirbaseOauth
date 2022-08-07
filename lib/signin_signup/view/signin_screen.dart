@@ -85,6 +85,7 @@ class SignInScreen extends StatelessWidget {
                         )
                       : GestureDetector(
                           onTap: () {
+                            FocusScope.of(context).unfocus();
                             context.read<SigningPov>().callSignIn(context);
                           },
                           child: Container(
@@ -125,9 +126,13 @@ class SignInScreen extends StatelessWidget {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () => Routes.push(
-                      screen: const SignUpScreen(),
-                    ),
+                    onTap: () {
+                      FocusScope.of(context).unfocus();
+                      Routes.push(
+                        screen: const SignUpScreen(),
+                      );
+                      context.read<SigningPov>().disposeItems(context);
+                    },
                     child: const Text(
                       'Sign Up',
                       style: TextStyle(
