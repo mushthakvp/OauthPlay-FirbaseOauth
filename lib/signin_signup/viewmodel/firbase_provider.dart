@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -19,8 +20,10 @@ class OauthPov extends ChangeNotifier {
         email: email.trim(),
         password: password.trim(),
       );
+
       isLoading = false;
       notifyListeners();
+
       return Future.value('');
     } on FirebaseAuthException catch (ex) {
       isLoading = false;
@@ -37,10 +40,10 @@ class OauthPov extends ChangeNotifier {
         email: email.trim(),
         password: password.trim(),
       );
-      // ignore: use_build_context_synchronously
-
+      await registerdata(email, password, image, name);
       isLoadingUp = false;
       notifyListeners();
+
       return Future.value('');
     } on FirebaseAuthException catch (ex) {
       isLoadingUp = false;
@@ -74,5 +77,13 @@ class OauthPov extends ChangeNotifier {
       return Future.value(ex.message);
     }
   }
-  
+
+  registerdata(String email, String password, String image, String name) {
+    FirebaseFirestore.instance.collection(email).add({
+      'password': password,
+      'email': email,
+      'image': image,
+      'name': name,
+    });
+  }
 }

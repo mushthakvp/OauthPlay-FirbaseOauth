@@ -17,7 +17,7 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return Scaffold( 
+    return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -94,13 +94,14 @@ class SignUpScreen extends StatelessWidget {
                           height: 50,
                           child: const Center(
                             child: CupertinoActivityIndicator(
-                              radius: 15,
+                              radius: 16,
                               color: Colors.white,
                             ),
                           ),
                         )
                       : GestureDetector(
                           onTap: () {
+                            FocusScope.of(context).unfocus();
                             context.read<SigningPov>().callSignUp(context);
                           },
                           child: Container(
@@ -141,7 +142,11 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () => Routes.pop(),
+                    onTap: () {
+                      FocusScope.of(context).unfocus();
+                      context.read<SigningPov>().disposeItems(context);
+                      Routes.pop();
+                    },
                     child: const Text(
                       'Login',
                       style: TextStyle(
@@ -173,14 +178,36 @@ class ImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<UserImagePov>(
-      builder: (context, value, child) => GestureDetector(
-        onTap: () {
-          value.pickImage();
-        },
-        child: CircleAvatar(
-          radius: 70,
-          backgroundImage: MemoryImage(
-            const Base64Decoder().convert(value.imageToString),
+      builder: (context, value, child) => Center(
+        child: SizedBox(
+          height: 115,
+          width: 115,
+          child: Stack(
+            clipBehavior: Clip.none,
+            fit: StackFit.expand,
+            children: [
+              CircleAvatar(
+                backgroundColor: Colors.transparent,
+                radius: 60,
+                backgroundImage: MemoryImage(
+                  const Base64Decoder().convert(value.imageToString),
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                right: -30,
+                child: RawMaterialButton(
+                  onPressed: () {
+                    value.pickImage();
+                  },
+                  elevation: 4,
+                  fillColor: Colors.white,
+                  padding: const EdgeInsets.all(8),
+                  shape: const CircleBorder(),
+                  child: const Icon(Icons.camera_alt_outlined),
+                ),
+              )
+            ],
           ),
         ),
       ),
