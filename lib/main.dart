@@ -1,4 +1,5 @@
 import 'package:crud/home/view_model/home_provider.dart';
+import 'package:crud/home/view_model/image_provider.dart';
 import 'package:crud/routes/routes.dart';
 import 'package:crud/signin_signup/viewmodel/firbase_provider.dart';
 import 'package:crud/signin_signup/viewmodel/signup_provider.dart';
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
         StreamProvider(create: (context) => context.watch<OauthPov>().stream(), initialData: null),
         ChangeNotifierProvider<HomeScreenPov>(create: (context) => HomeScreenPov()),
         ChangeNotifierProvider<UserImagePov>(create: (context) => UserImagePov()),
+        ChangeNotifierProvider<UserImagePovHome>(create: (context) => UserImagePovHome()),
       ],
       child: MaterialApp(
         navigatorKey: Routes.navigatorKey,

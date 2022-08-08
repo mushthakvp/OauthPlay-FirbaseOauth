@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:crud/home/view_model/home_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OauthPov extends ChangeNotifier {
   final FirebaseAuth _auth;
@@ -21,6 +25,7 @@ class OauthPov extends ChangeNotifier {
         password: password.trim(),
       );
 
+      sharedFunction(email);
       isLoading = false;
       notifyListeners();
 
@@ -41,6 +46,8 @@ class OauthPov extends ChangeNotifier {
         password: password.trim(),
       );
       await registerdata(email, password, image, name);
+
+      sharedFunction(email);
       isLoadingUp = false;
       notifyListeners();
 
@@ -85,5 +92,13 @@ class OauthPov extends ChangeNotifier {
       'image': image,
       'name': name,
     });
+  }
+
+  sharedFunction(String email) async {
+    emailFb = email;
+    log(emailFb);
+    final obj = await SharedPreferences.getInstance();
+    obj.setBool('login', true);
+    obj.setString('userName', email);
   }
 }
