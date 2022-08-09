@@ -14,8 +14,6 @@ class OauthPov extends ChangeNotifier {
   bool isLoading = false;
   bool isLoadingUp = false;
 
-  Stream<User?> stream() => _auth.authStateChanges();
-
   Future<String> signIn({required String email, required String password}) async {
     try {
       isLoading = true;
@@ -25,7 +23,7 @@ class OauthPov extends ChangeNotifier {
         password: password.trim(),
       );
 
-      sharedFunction(email);
+      await sharedFunction(email);
       isLoading = false;
       notifyListeners();
 
@@ -47,7 +45,7 @@ class OauthPov extends ChangeNotifier {
       );
       await registerdata(email, password, image, name);
 
-      sharedFunction(email);
+      await sharedFunction(email);
       isLoadingUp = false;
       notifyListeners();
 
@@ -84,7 +82,7 @@ class OauthPov extends ChangeNotifier {
       return Future.value(ex.message);
     }
   }
-
+ 
   registerdata(String email, String password, String image, String name) {
     FirebaseFirestore.instance.collection(email).add({
       'password': password,

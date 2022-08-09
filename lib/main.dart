@@ -27,7 +27,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<SplashPov>(create: (context) => SplashPov()),
         ChangeNotifierProvider<SigningPov>(create: (context) => SigningPov()),
         ChangeNotifierProvider<OauthPov>(create: (context) => OauthPov(FirebaseAuth.instance)),
-        StreamProvider(create: (context) => context.watch<OauthPov>().stream(), initialData: null),
         ChangeNotifierProvider<HomeScreenPov>(create: (context) => HomeScreenPov()),
         ChangeNotifierProvider<UserImagePov>(create: (context) => UserImagePov()),
         ChangeNotifierProvider<UserImagePovHome>(create: (context) => UserImagePovHome()),
