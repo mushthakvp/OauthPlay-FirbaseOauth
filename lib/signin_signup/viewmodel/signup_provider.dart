@@ -1,5 +1,4 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'package:crud/core/const.dart';
 import 'package:crud/home/view/home_screen.dart';
 import 'package:crud/routes/routes.dart';
@@ -7,6 +6,7 @@ import 'package:crud/signin_signup/viewmodel/firbase_provider.dart';
 import 'package:crud/signin_signup/viewmodel/userimage_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../home/view_model/home_provider.dart';
 
 class SigningPov extends ChangeNotifier {
   final scafoldKeySign = GlobalKey<ScaffoldState>();
@@ -37,6 +37,7 @@ class SigningPov extends ChangeNotifier {
 
   callSignUp(BuildContext context) async {
     final email = emailController.text.trim();
+    emailFb = email;
     final name = nameController.text.trim();
     final image = context.read<UserImagePov>().imageToString;
     final passWord = passwordController.text.trim();
@@ -69,9 +70,9 @@ class SigningPov extends ChangeNotifier {
   }
 
   disposeItems(BuildContext context) {
-    nameController.text = '';
-    emailController.text = '';
-    passwordController.text = '';
+    nameController.clear();
+    emailController.clear();
+    passwordController.clear();
     context.read<UserImagePov>().imageToString = encodeImage;
   }
 }
